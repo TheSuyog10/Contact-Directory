@@ -1,7 +1,11 @@
 // Main.jsx
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleUser,
+  faPenToSquare,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { UseContact } from "../Context/ContactContext";
 
 export const Main = () => {
@@ -45,6 +49,12 @@ export const Main = () => {
                   <h3 className="contact-name">{contactInfo.name}</h3>
                   <h2 className="contact-phone">{contactInfo.phone}</h2>
                   <h4 className="contact-email">{contactInfo.email}</h4>
+                </div>
+                <div className="edit-icons">
+                  {" "}
+                  <FontAwesomeIcon icon={faPenToSquare} />
+                  <br></br>
+                  <FontAwesomeIcon icon={faTrash} />
                 </div>
               </div>
               <hr></hr>
