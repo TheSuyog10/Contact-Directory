@@ -1,4 +1,3 @@
-import { Route, Routes, Link } from "react-router-dom";
 import React from "react";
 import { Home } from "./components/Home";
 import { AddContacts } from "./components/AddContacts";

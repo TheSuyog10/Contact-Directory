@@ -1,6 +1,7 @@
 // ContactContext.js
 import React, { createContext, useContext, useState, useEffect } from "react";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 const ContactContext = createContext();
 
 export const ContactContextProvider = ({ children }) => {
@@ -29,6 +30,23 @@ export const ContactContextProvider = ({ children }) => {
   const updateLocalStorage = (contacts) => {
     localStorage.setItem("contactInfos", JSON.stringify(contacts));
   };
+  const deleteContact = (id) => {
+    setContactInfos((prevValue) => {
+      const updatedContacts = prevValue.filter((contact) => contact.id !== id);
+      updateLocalStorage(updatedContacts);
+      return updatedContacts;
+    });
+    setSuccessMessage(
+      <span>
+        {" "}
+        <FontAwesomeIcon icon={faCheckCircle} />
+        Contact Deleted Successfully
+      </span>
+    );
+    setTimeout(() => {
+      setSuccessMessage("");
+    }, 1000);
+  };
 
   return (
     <ContactContext.Provider
@@ -41,6 +59,7 @@ export const ContactContextProvider = ({ children }) => {
         setSearchTerm,
         successMessage,
         setSuccessMessage,
+        deleteContact,
       }}
     >
       {children}
@@ -63,6 +82,7 @@ export const UseContact = () => {
     setSearchTerm,
     successMessage,
     setSuccessMessage,
+    deleteContact,
   } = context;
 
   return {
@@ -74,5 +94,6 @@ export const UseContact = () => {
     setSearchTerm,
     successMessage,
     setSuccessMessage,
+    deleteContact,
   };
 };

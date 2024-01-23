@@ -8,8 +8,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { UseContact } from "../Context/ContactContext";
 
-export const Main = () => {
-  const { setShowAddPage, contactInfos, searchTerm } = UseContact();
+export const Main = ({}) => {
+  const { setShowAddPage, contactInfos, searchTerm, deleteContact } =
+    UseContact();
 
   function handleShow() {
     setShowAddPage(true);
@@ -54,7 +55,10 @@ export const Main = () => {
                   {" "}
                   <FontAwesomeIcon icon={faPenToSquare} />
                   <br></br>
-                  <FontAwesomeIcon icon={faTrash} />
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    onClick={() => deleteContact(contactInfo.id)}
+                  />
                 </div>
               </div>
               <hr></hr>
