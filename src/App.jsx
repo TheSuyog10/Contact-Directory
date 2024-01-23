@@ -4,10 +4,10 @@ import { AddContacts } from "./components/AddContacts";
 import { UseContact } from "./Context/ContactContext";
 import "./App.css";
 function App() {
-  const { showAddPage, setShowAddPage } = UseContact();
+  const { darkMode } = UseContact();
 
   return (
-    <div className="container">
+    <div className={`container ${darkMode ? "" : "light"}`}>
       <div className="content">
         <Home />
         <AddContacts />

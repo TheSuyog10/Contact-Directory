@@ -9,7 +9,7 @@ import { UseContact } from "../Context/ContactContext";
 import { nanoid } from "nanoid";
 
 export const AddContacts = () => {
-  const { showAddPage, setShowAddPage } = UseContact();
+  const { showAddPage, setShowAddPage, darkMode } = UseContact();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -76,7 +76,7 @@ export const AddContacts = () => {
 
   return (
     <div className={`overlay ${showAddPage ? "show" : ""}`}>
-      <div className="form">
+      <div className={`form ${darkMode ? "" : "light"}`}>
         <div className="top">
           <h1>Add Contact</h1>
           <button className="close" onClick={handleClose}>

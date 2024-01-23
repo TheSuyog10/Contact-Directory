@@ -9,6 +9,7 @@ export const ContactContextProvider = ({ children }) => {
   const [showAddPage, setShowAddPage] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     const storedContacts =
@@ -47,6 +48,12 @@ export const ContactContextProvider = ({ children }) => {
       setSuccessMessage("");
     }, 1000);
   };
+  function toggleTheme() {
+    setDarkMode((prevValue) => {
+      console.log("Toggle theme called", !prevValue);
+      return !prevValue;
+    });
+  }
 
   return (
     <ContactContext.Provider
@@ -60,6 +67,8 @@ export const ContactContextProvider = ({ children }) => {
         successMessage,
         setSuccessMessage,
         deleteContact,
+        toggleTheme,
+        darkMode,
       }}
     >
       {children}
@@ -83,6 +92,8 @@ export const UseContact = () => {
     successMessage,
     setSuccessMessage,
     deleteContact,
+    toggleTheme,
+    darkMode,
   } = context;
 
   return {
@@ -95,5 +106,7 @@ export const UseContact = () => {
     successMessage,
     setSuccessMessage,
     deleteContact,
+    toggleTheme,
+    darkMode,
   };
 };

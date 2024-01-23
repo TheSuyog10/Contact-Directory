@@ -3,7 +3,8 @@ import React from "react";
 import { UseContact } from "../Context/ContactContext";
 
 export const Header = () => {
-  const { setShowAddPage, setSearchTerm, successMessage } = UseContact();
+  const { setShowAddPage, setSearchTerm, successMessage, darkMode } =
+    UseContact();
 
   function handleShow() {
     setShowAddPage(true);
@@ -14,7 +15,7 @@ export const Header = () => {
   };
 
   return (
-    <div className="Header">
+    <div className={`Header ${darkMode ? "" : "light"}`}>
       <h1>Contacts</h1>
       <span className="success-message">{successMessage}</span>
       <div className="search-section">

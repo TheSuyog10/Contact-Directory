@@ -19,6 +19,7 @@
   background-color: #1c1c1c;
   border-radius: 1.5rem;
   margin: 1rem;
+  transition: background-color 0.5s ease;
 }
 .content {
   margin: 3.5rem 1.8rem;
@@ -85,6 +86,7 @@
   width: 1.1rem;
   height: 1.1rem;
   font-weight: bold;
+  transition: fill 0.5s ease;
 }
 .button-section {
   background-color: #0085ff;
@@ -209,6 +211,7 @@ img {
   border-radius: 20px;
   width: 100%;
   color: white;
+  transition: border-color 0.5s ease;
 }
 
 .inputGroup label {
@@ -272,6 +275,7 @@ input::-webkit-inner-spin-button {
   display: flex;
   gap: 1.4rem;
   position: relative;
+  transition: color 0.5s ease;
 }
 .contact-list-container {
   max-height: 67vh;
@@ -285,13 +289,13 @@ input::-webkit-inner-spin-button {
 .edit-icons {
   position: absolute;
   right: 0;
+  color: rgb(205, 204, 204);
 }
 .edit-icons :nth-child(1) {
   margin-bottom: 0.7rem;
   width: 1rem;
   height: 1rem;
   cursor: pointer;
-  color: rgb(205, 204, 204);
 }
 .edit-icons :nth-child(1) :hover {
   color: #406ebe;
@@ -324,4 +328,113 @@ input::-webkit-inner-spin-button {
 
 .contact-list-container::-webkit-scrollbar-thumb:hover {
   background-color: #304a65;
+}
+/* Toggle button */
+.toggle-button {
+  position: absolute;
+  left: 80%;
+  top: 90%;
+}
+.toggle {
+  background-color: #fff;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.1);
+  line-height: 1;
+}
+
+.inputs {
+  display: none;
+}
+
+.icons {
+  grid-column: 1 / 1;
+  grid-row: 1 / 1;
+  transition: transform 300ms;
+}
+
+.icon--moon {
+  transition-delay: 100ms;
+}
+
+.icon--sun {
+  transform: scale(0);
+}
+
+#switch:checked + .icon--moon {
+  transform: rotate(360deg) scale(0);
+}
+
+#switch:checked ~ .icon--sun {
+  transition-delay: 100ms;
+  transform: scale(1) rotate(360deg);
+}
+/* Light Mode  */
+.Main.light .toggle {
+  background-color: #3c3c3c;
+}
+.Main.light .icon--moon {
+  fill: white;
+}
+.container.light {
+  background-color: rgb(246, 246, 246);
+  transition: background-color 0.5s ease;
+}
+.Main.light .user-icon {
+  background-color: black;
+}
+.Main.light .contact-lists {
+  color: #3c3c3c;
+}
+.Main.light hr {
+  border-color: rgb(0, 0, 0);
+}
+.Main.light .edit-icons {
+  color: #3c3c3c;
+}
+.Main.light .no-contacts h2 {
+  color: #3c3c3c;
+}
+.Main.light .contact-email,
+.Main.light .contact-phone {
+  color: rgb(108, 106, 106);
+}
+.Header.light h1 {
+  color: #3c3c3c;
+}
+.Header.light .input {
+  background-color: white;
+  color: #3c3c3c;
+  outline: rgba(118, 115, 115, 0.8) solid;
+}
+.Header.light .input::placeholder {
+  color: #323235;
+}
+.Header.light .input:focus {
+  outline: rgba(0, 0, 0, 1) solid;
+}
+.Header.light .icon {
+  fill: black;
+}
+.form.light {
+  background-color: rgb(240, 240, 240) !important;
+}
+.form.light .top,
+.form.light .close {
+  color: #3c3c3c;
+}
+.form.light .inputGroup input {
+  border: 2px solid rgb(69, 69, 70);
+  color: #3c3c3c;
+}
+.form.light .inputGroup label {
+  color: #3c3c3c;
+}
+.form.light .inputGroup input:focus ~ label,
+.form.light .inputGroup input:valid ~ label {
+  background-color: #f0f0f0;
 }
