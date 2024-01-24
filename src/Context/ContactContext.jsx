@@ -13,13 +13,36 @@ export const ContactContextProvider = ({ children }) => {
   const [showEditPage, setShowEditPage] = useState(false);
   const [editingContactId, setEditingContactId] = useState(null); // New state to track the contact being edited
   const [message, setMessage] = useState("");
+  const [contactName, setContactName] = useState();
   useEffect(() => {
     const storedContacts =
       JSON.parse(localStorage.getItem("contactInfos")) || [];
     setContactInfos(storedContacts);
   }, []);
 
+  // const addContact = (newContact) => {
+  //   setContactInfos((prevContacts) => {
+  //     const updatedContacts = [...prevContacts, newContact];
+  //     const sortedContacts = updatedContacts.sort((a, b) =>
+  //       a.name.localeCompare(b.name)
+  //     );
+  //     updateLocalStorage(sortedContacts);
+  //     return sortedContacts;
+  //   });
+  // };
   const addContact = (newContact) => {
+    // Check if a contact with the same email or phone already exists
+    const isContactExists = contactInfos.some((contact) => {
+      if (contact.phone === newContact.phone) {
+        setMessage(`Contact Already Exists with Name ${contact.name}`);
+        setTimeout(() => {
+          setMessage("");
+        }, 3000);
+        return;
+      }
+      return false;
+    });
+
     setContactInfos((prevContacts) => {
       const updatedContacts = [...prevContacts, newContact];
       const sortedContacts = updatedContacts.sort((a, b) =>
@@ -28,8 +51,20 @@ export const ContactContextProvider = ({ children }) => {
       updateLocalStorage(sortedContacts);
       return sortedContacts;
     });
+    setName("");
+    setEmail("");
+    setPhone("");
+    setShowAddPage(false);
+    setSuccessMessage(
+      <span>
+        {" "}
+        <FontAwesomeIcon icon={faCheckCircle} /> Contact added successfully!
+      </span>
+    );
+    setTimeout(() => {
+      setSuccessMessage("");
+    }, 1000);
   };
-
   const updateContact = (updatedContact) => {
     setContactInfos((prevContacts) => {
       const updatedContacts = prevContacts.map((contact) =>

@@ -54,20 +54,18 @@ export const AddContacts = () => {
 
     const newContact = { id: nanoid(), name: name, phone: phone, email: email };
     addContact(newContact);
-    setShowAddPage(false);
-    setName("");
-    setEmail("");
-    setPhone("");
-    setMessage("");
-    setSuccessMessage(
-      <span>
-        {" "}
-        <FontAwesomeIcon icon={faCheckCircle} /> Contact Added Successfully!!
-      </span>
-    );
-    setTimeout(() => {
-      setSuccessMessage("");
-    }, 1000);
+    //
+
+    // // setMessage("");
+    // setSuccessMessage(
+    //   <span>
+    //     {" "}
+    //     <FontAwesomeIcon icon={faCheckCircle} /> Contact Added Successfully!!
+    //   </span>
+    // );
+    // setTimeout(() => {
+    //   setSuccessMessage("");
+    // }, 1000);
   };
 
   function handleClose() {

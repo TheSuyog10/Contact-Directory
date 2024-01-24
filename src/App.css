@@ -458,6 +458,8 @@ input::-webkit-inner-spin-button {
   background-color: #f0f0f0;
 }
 @media only screen and (max-width: 600px) {
+  #root {
+  }
   .container {
     width: 100%;
     border-radius: 0;
