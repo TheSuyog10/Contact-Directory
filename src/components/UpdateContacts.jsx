@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faX,
@@ -8,13 +8,34 @@ import {
 import { UseContact } from "../Context/ContactContext";
 import { nanoid } from "nanoid";
 
-export const AddContacts = () => {
-  const { showAddPage, setShowAddPage, darkMode } = UseContact();
+export const UpdateContacts = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-
-  const { addContact, setSuccessMessage, message, setMessage } = UseContact();
+  const [message, setMessage] = useState("");
+  const {
+    showEditPage,
+    setShowEditPage,
+    darkMode,
+    editingContactId,
+    stopEditingContact,
+    updateContact,
+    contactInfos,
+    setSuccessMessage,
+  } = UseContact();
+  useEffect(() => {
+    // Fetch the contact details based on editingContactId and set them to state
+    if (editingContactId) {
+      const editingContact = contactInfos.find(
+        (contact) => contact.id === editingContactId
+      );
+      if (editingContact) {
+        setName(editingContact.name);
+        setPhone(editingContact.phone);
+        setEmail(editingContact.email);
+      }
+    }
+  }, [editingContactId]);
 
   const validateEmail = (email) => {
     const re =
@@ -52,9 +73,15 @@ export const AddContacts = () => {
       return;
     }
 
-    const newContact = { id: nanoid(), name: name, phone: phone, email: email };
-    addContact(newContact);
-    setShowAddPage(false);
+    const updateedContact = {
+      id: editingContactId || nanoid(),
+      name,
+      phone,
+      email,
+    };
+    updateContact(updateedContact); // Use updateContact to update the contact
+
+    setShowEditPage(false);
     setName("");
     setEmail("");
     setPhone("");
@@ -62,7 +89,7 @@ export const AddContacts = () => {
     setSuccessMessage(
       <span>
         {" "}
-        <FontAwesomeIcon icon={faCheckCircle} /> Contact Added Successfully!!
+        <FontAwesomeIcon icon={faCheckCircle} /> Contact Updated Successfully!!
       </span>
     );
     setTimeout(() => {
@@ -71,14 +98,14 @@ export const AddContacts = () => {
   };
 
   function handleClose() {
-    setShowAddPage(false);
+    stopEditingContact();
   }
 
   return (
-    <div className={`overlay ${showAddPage ? "show" : ""}`}>
+    <div className={`overlay-edit-page ${showEditPage ? "show" : ""}`}>
       <div className={`form ${darkMode ? "" : "light"}`}>
         <div className="top">
-          <h1>Add Contact</h1>
+          <h1>Update Contact</h1>
           <button className="close" onClick={handleClose}>
             <FontAwesomeIcon icon={faX} />
           </button>
@@ -125,7 +152,7 @@ export const AddContacts = () => {
           </div>
         </div>
         <button className="add-contacts" onClick={handleSubmit}>
-          Add Contact
+          Update Contact
         </button>
       </div>
     </div>

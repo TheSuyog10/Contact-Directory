@@ -9,8 +9,10 @@ export const ContactContextProvider = ({ children }) => {
   const [showAddPage, setShowAddPage] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [darkMode, setDarkMode] = useState(false);
-
+  const [darkMode, setDarkMode] = useState(true);
+  const [showEditPage, setShowEditPage] = useState(false);
+  const [editingContactId, setEditingContactId] = useState(null); // New state to track the contact being edited
+  const [message, setMessage] = useState("");
   useEffect(() => {
     const storedContacts =
       JSON.parse(localStorage.getItem("contactInfos")) || [];
@@ -28,6 +30,15 @@ export const ContactContextProvider = ({ children }) => {
     });
   };
 
+  const updateContact = (updatedContact) => {
+    setContactInfos((prevContacts) => {
+      const updatedContacts = prevContacts.map((contact) =>
+        contact.id === updatedContact.id ? updatedContact : contact
+      );
+      updateLocalStorage(updatedContacts);
+      return updatedContacts;
+    });
+  };
   const updateLocalStorage = (contacts) => {
     localStorage.setItem("contactInfos", JSON.stringify(contacts));
   };
@@ -48,11 +59,22 @@ export const ContactContextProvider = ({ children }) => {
       setSuccessMessage("");
     }, 1000);
   };
+
   function toggleTheme() {
     setDarkMode((prevValue) => {
       console.log("Toggle theme called", !prevValue);
       return !prevValue;
     });
+  }
+
+  function startEditingContact(id) {
+    setEditingContactId(id);
+    setShowEditPage(true);
+  }
+
+  function stopEditingContact() {
+    setEditingContactId(null);
+    setShowEditPage(false);
   }
 
   return (
@@ -69,6 +91,14 @@ export const ContactContextProvider = ({ children }) => {
         deleteContact,
         toggleTheme,
         darkMode,
+        showEditPage,
+        setShowEditPage,
+        editingContactId,
+        startEditingContact,
+        stopEditingContact,
+        updateContact,
+        message,
+        setMessage,
       }}
     >
       {children}
@@ -94,6 +124,14 @@ export const UseContact = () => {
     deleteContact,
     toggleTheme,
     darkMode,
+    showEditPage,
+    setShowEditPage,
+    editingContactId,
+    startEditingContact,
+    stopEditingContact,
+    updateContact,
+    message,
+    setMessage,
   } = context;
 
   return {
@@ -108,5 +146,13 @@ export const UseContact = () => {
     deleteContact,
     toggleTheme,
     darkMode,
+    showEditPage,
+    setShowEditPage,
+    editingContactId,
+    startEditingContact,
+    stopEditingContact,
+    updateContact,
+    message,
+    setMessage,
   };
 };

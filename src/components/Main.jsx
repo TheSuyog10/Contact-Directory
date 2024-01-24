@@ -16,15 +16,13 @@ export const Main = ({}) => {
     deleteContact,
     darkMode,
     toggleTheme,
+    startEditingContact,
   } = UseContact();
 
   function handleShow() {
     setShowAddPage(true);
   }
-  const [theme, setTheme] = useState("");
-  useEffect(() => {
-    setTheme(darkMode ? "" : "light");
-  }, [darkMode]);
+
   const filteredContacts = contactInfos.filter((contactInfo) =>
     contactInfo.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -62,7 +60,11 @@ export const Main = ({}) => {
                 </div>
                 <div className="edit-icons">
                   {" "}
-                  <FontAwesomeIcon icon={faPenToSquare} />
+                  <FontAwesomeIcon
+                    icon={faPenToSquare}
+                    onClick={() => startEditingContact(contactInfo.id)}
+                    title="Edit Contact"
+                  />
                   <br></br>
                   <FontAwesomeIcon
                     icon={faTrash}
