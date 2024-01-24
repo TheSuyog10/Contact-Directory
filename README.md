@@ -11,6 +11,7 @@ This repository contains the source code and files related to managing contacts.
 - 🔍 Search for contacts
 - ✏️ Update existing contacts
 - 🗑️ Delete contacts
+- 🌙🌞 Toggle between dark and light themes
 
 
 ## Technologies Used
