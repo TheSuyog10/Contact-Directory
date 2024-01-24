@@ -458,8 +458,9 @@ input::-webkit-inner-spin-button {
   background-color: #f0f0f0;
 }
 @media only screen and (max-width: 600px) {
-  #root {
-  }
+  /* #root {
+    height: ;
+  } */
   .container {
     width: 100%;
     border-radius: 0;
@@ -468,6 +469,7 @@ input::-webkit-inner-spin-button {
 
   .content {
     margin: 1.5rem;
+    height: 95vh;
   }
 
   .Header h1 {

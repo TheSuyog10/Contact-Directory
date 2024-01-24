@@ -14,6 +14,9 @@ export const ContactContextProvider = ({ children }) => {
   const [editingContactId, setEditingContactId] = useState(null); // New state to track the contact being edited
   const [message, setMessage] = useState("");
   const [contactName, setContactName] = useState();
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   useEffect(() => {
     const storedContacts =
       JSON.parse(localStorage.getItem("contactInfos")) || [];
@@ -34,14 +37,18 @@ export const ContactContextProvider = ({ children }) => {
     // Check if a contact with the same email or phone already exists
     const isContactExists = contactInfos.some((contact) => {
       if (contact.phone === newContact.phone) {
-        setMessage(`Contact Already Exists with Name ${contact.name}`);
-        setTimeout(() => {
-          setMessage("");
-        }, 3000);
-        return;
+        setMessage(`Contact Already Exists ${contact.name}`);
+        return true;
       }
       return false;
     });
+
+    if (isContactExists) {
+      setTimeout(() => {
+        setMessage("");
+      }, 3000);
+      return;
+    }
 
     setContactInfos((prevContacts) => {
       const updatedContacts = [...prevContacts, newContact];
@@ -134,6 +141,12 @@ export const ContactContextProvider = ({ children }) => {
         updateContact,
         message,
         setMessage,
+        name,
+        setName,
+        phone,
+        setPhone,
+        email,
+        setEmail,
       }}
     >
       {children}
@@ -167,6 +180,12 @@ export const UseContact = () => {
     updateContact,
     message,
     setMessage,
+    name,
+    setName,
+    phone,
+    setPhone,
+    email,
+    setEmail,
   } = context;
 
   return {
@@ -189,5 +208,11 @@ export const UseContact = () => {
     updateContact,
     message,
     setMessage,
+    name,
+    setName,
+    phone,
+    setPhone,
+    email,
+    setEmail,
   };
 };

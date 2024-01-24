@@ -10,11 +10,19 @@ import { nanoid } from "nanoid";
 
 export const AddContacts = () => {
   const { showAddPage, setShowAddPage, darkMode } = UseContact();
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
 
-  const { addContact, setSuccessMessage, message, setMessage } = UseContact();
+  const {
+    addContact,
+
+    message,
+    setMessage,
+    name,
+    setName,
+    phone,
+    setPhone,
+    email,
+    setEmail,
+  } = UseContact();
 
   const validateEmail = (email) => {
     const re =
@@ -54,18 +62,6 @@ export const AddContacts = () => {
 
     const newContact = { id: nanoid(), name: name, phone: phone, email: email };
     addContact(newContact);
-    //
-
-    // // setMessage("");
-    // setSuccessMessage(
-    //   <span>
-    //     {" "}
-    //     <FontAwesomeIcon icon={faCheckCircle} /> Contact Added Successfully!!
-    //   </span>
-    // );
-    // setTimeout(() => {
-    //   setSuccessMessage("");
-    // }, 1000);
   };
 
   function handleClose() {
