@@ -9,10 +9,6 @@ import { UseContact } from "../Context/ContactContext";
 import { nanoid } from "nanoid";
 
 export const UpdateContacts = () => {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
   const {
     showEditPage,
     setShowEditPage,
@@ -22,6 +18,14 @@ export const UpdateContacts = () => {
     updateContact,
     contactInfos,
     setSuccessMessage,
+    message,
+    setMessage,
+    name,
+    setName,
+    phone,
+    setPhone,
+    email,
+    setEmail,
   } = UseContact();
   useEffect(() => {
     // Fetch the contact details based on editingContactId and set them to state
@@ -81,24 +85,27 @@ export const UpdateContacts = () => {
     };
     updateContact(updateedContact); // Use updateContact to update the contact
 
-    setShowEditPage(false);
-    setName("");
-    setEmail("");
-    setPhone("");
-    setMessage("");
-    setSuccessMessage(
-      <span>
-        {" "}
-        <FontAwesomeIcon icon={faCheckCircle} /> Contact Updated Successfully!!
-      </span>
-    );
-    setTimeout(() => {
-      setSuccessMessage("");
-    }, 1000);
+    // setShowEditPage(false);
+    // setName("");
+    // setEmail("");
+    // setPhone("");
+    // setMessage("");
+    // setSuccessMessage(
+    //   <span>
+    //     {" "}
+    //     <FontAwesomeIcon icon={faCheckCircle} /> Contact Updated Successfully!!
+    //   </span>
+    // );
+    // setTimeout(() => {
+    //   setSuccessMessage("");
+    // }, 1000);
   };
 
   function handleClose() {
     stopEditingContact();
+    setName("");
+    setEmail("");
+    setPhone("");
   }
 
   return (

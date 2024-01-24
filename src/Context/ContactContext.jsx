@@ -34,7 +34,6 @@ export const ContactContextProvider = ({ children }) => {
   //   });
   // };
   const addContact = (newContact) => {
-    // Check if a contact with the same email or phone already exists
     const isContactExists = contactInfos.some((contact) => {
       if (contact.phone === newContact.phone) {
         setMessage(`Contact Already Exists ${contact.name}`);
@@ -73,6 +72,22 @@ export const ContactContextProvider = ({ children }) => {
     }, 1000);
   };
   const updateContact = (updatedContact) => {
+    const isContactExists = contactInfos.some((contact) => {
+      if (
+        contact.id !== updatedContact.id &&
+        contact.phone === updatedContact.phone
+      ) {
+        setMessage(`Contact already exists with name ${contact.name}`);
+        return true;
+      }
+      return false;
+    });
+    if (isContactExists) {
+      setTimeout(() => {
+        setMessage("");
+      }, 1000);
+      return;
+    }
     setContactInfos((prevContacts) => {
       const updatedContacts = prevContacts.map((contact) =>
         contact.id === updatedContact.id ? updatedContact : contact
@@ -80,6 +95,19 @@ export const ContactContextProvider = ({ children }) => {
       updateLocalStorage(updatedContacts);
       return updatedContacts;
     });
+    setName("");
+    setEmail("");
+    setPhone("");
+    setShowEditPage(false);
+    setSuccessMessage(
+      <span>
+        {" "}
+        <FontAwesomeIcon icon={faCheckCircle} /> Contact updated successfully!
+      </span>
+    );
+    setTimeout(() => {
+      setSuccessMessage("");
+    }, 1000);
   };
   const updateLocalStorage = (contacts) => {
     localStorage.setItem("contactInfos", JSON.stringify(contacts));
