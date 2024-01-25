@@ -17,6 +17,7 @@ export const Main = ({}) => {
     darkMode,
     toggleTheme,
     startEditingContact,
+    image,
   } = UseContact();
 
   function handleShow() {
@@ -47,11 +48,23 @@ export const Main = ({}) => {
             <div key={index}>
               <div className="contact-lists">
                 <div>
-                  <FontAwesomeIcon
-                    icon={faCircleUser}
-                    style={{ color: "#146aff" }}
-                    className="user-icon"
-                  />
+                  {contactInfo.image ? (
+                    <img
+                      src={contactInfo.image}
+                      alt="User"
+                      style={{
+                        width: "3rem", // Set the width to match the icon
+                        height: "3rem", // Set the height to match the icon
+                        borderRadius: "56%",
+                      }}
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={faCircleUser}
+                      style={{ color: "#146aff" }}
+                      className="user-icon"
+                    />
+                  )}
                 </div>
                 <div className="contact-info">
                   <h3 className="contact-name">{contactInfo.name}</h3>

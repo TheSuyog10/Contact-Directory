@@ -457,19 +457,34 @@ input::-webkit-inner-spin-button {
 .form.light .inputGroup input:valid ~ label {
   background-color: #f0f0f0;
 }
+.image-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.image {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-top: 0.5rem;
+}
+.image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
 @media only screen and (max-width: 600px) {
-  /* #root {
-    height: ;
-  } */
   .container {
     width: 100%;
     border-radius: 0;
-    height: 100vh; /* No border radius for mobile */
+    height: 94vh;
+    margin: 0;
+    padding: 0;
   }
 
   .content {
     margin: 1.5rem;
-    height: 95vh;
+    /* height: 94vh; */
   }
 
   .Header h1 {
@@ -480,8 +495,14 @@ input::-webkit-inner-spin-button {
     left: 28%;
     font-size: 0.7rem;
   }
-  .contact-list-container {
-    max-height: 80vh;
+
+  .search-box {
+    min-width: 82%;
+  }
+  .search-section {
+    margin-top: 1rem;
+
+    justify-content: space-between;
   }
   /* Add more mobile-specific styles as needed */
 }

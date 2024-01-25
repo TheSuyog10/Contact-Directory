@@ -11,9 +11,9 @@ export const ContactContextProvider = ({ children }) => {
   const [successMessage, setSuccessMessage] = useState("");
   const [darkMode, setDarkMode] = useState(true);
   const [showEditPage, setShowEditPage] = useState(false);
-  const [editingContactId, setEditingContactId] = useState(null); // New state to track the contact being edited
+  const [editingContactId, setEditingContactId] = useState(null);
   const [message, setMessage] = useState("");
-  const [contactName, setContactName] = useState();
+  const [image, setImage] = useState(null);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -23,20 +23,10 @@ export const ContactContextProvider = ({ children }) => {
     setContactInfos(storedContacts);
   }, []);
 
-  // const addContact = (newContact) => {
-  //   setContactInfos((prevContacts) => {
-  //     const updatedContacts = [...prevContacts, newContact];
-  //     const sortedContacts = updatedContacts.sort((a, b) =>
-  //       a.name.localeCompare(b.name)
-  //     );
-  //     updateLocalStorage(sortedContacts);
-  //     return sortedContacts;
-  //   });
-  // };
   const addContact = (newContact) => {
     const isContactExists = contactInfos.some((contact) => {
       if (contact.phone === newContact.phone) {
-        setMessage(`Contact Already Exists ${contact.name}`);
+        setMessage(`Contact already exist with name ${contact.name}`);
         return true;
       }
       return false;
@@ -77,7 +67,7 @@ export const ContactContextProvider = ({ children }) => {
         contact.id !== updatedContact.id &&
         contact.phone === updatedContact.phone
       ) {
-        setMessage(`Contact already exists with name ${contact.name}`);
+        setMessage(`Contact already exist with name ${contact.name}`);
         return true;
       }
       return false;
@@ -146,7 +136,19 @@ export const ContactContextProvider = ({ children }) => {
     setEditingContactId(null);
     setShowEditPage(false);
   }
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
 
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
   return (
     <ContactContext.Provider
       value={{
@@ -175,6 +177,9 @@ export const ContactContextProvider = ({ children }) => {
         setPhone,
         email,
         setEmail,
+        handleImageChange,
+        image,
+        setImage,
       }}
     >
       {children}
@@ -214,6 +219,9 @@ export const UseContact = () => {
     setPhone,
     email,
     setEmail,
+    handleImageChange,
+    image,
+    setImage,
   } = context;
 
   return {
@@ -242,5 +250,8 @@ export const UseContact = () => {
     setPhone,
     email,
     setEmail,
+    handleImageChange,
+    image,
+    setImage,
   };
 };

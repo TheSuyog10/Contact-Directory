@@ -11,13 +11,13 @@ import { nanoid } from "nanoid";
 export const UpdateContacts = () => {
   const {
     showEditPage,
-    setShowEditPage,
+
     darkMode,
     editingContactId,
     stopEditingContact,
     updateContact,
     contactInfos,
-    setSuccessMessage,
+
     message,
     setMessage,
     name,
@@ -26,9 +26,11 @@ export const UpdateContacts = () => {
     setPhone,
     email,
     setEmail,
+    image,
+    setImage,
+    handleImageChange,
   } = UseContact();
   useEffect(() => {
-    // Fetch the contact details based on editingContactId and set them to state
     if (editingContactId) {
       const editingContact = contactInfos.find(
         (contact) => contact.id === editingContactId
@@ -37,6 +39,7 @@ export const UpdateContacts = () => {
         setName(editingContact.name);
         setPhone(editingContact.phone);
         setEmail(editingContact.email);
+        setImage(editingContact.image);
       }
     }
   }, [editingContactId]);
@@ -82,23 +85,9 @@ export const UpdateContacts = () => {
       name,
       phone,
       email,
+      image,
     };
-    updateContact(updateedContact); // Use updateContact to update the contact
-
-    // setShowEditPage(false);
-    // setName("");
-    // setEmail("");
-    // setPhone("");
-    // setMessage("");
-    // setSuccessMessage(
-    //   <span>
-    //     {" "}
-    //     <FontAwesomeIcon icon={faCheckCircle} /> Contact Updated Successfully!!
-    //   </span>
-    // );
-    // setTimeout(() => {
-    //   setSuccessMessage("");
-    // }, 1000);
+    updateContact(updateedContact);
   };
 
   function handleClose() {
@@ -106,6 +95,7 @@ export const UpdateContacts = () => {
     setName("");
     setEmail("");
     setPhone("");
+    setImage(null);
   }
 
   return (
@@ -156,6 +146,20 @@ export const UpdateContacts = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <label htmlFor="email">Email</label>
+          </div>
+          <div className="inputGroup images">
+            <input
+              type="file"
+              accept="image/*"
+              autoComplete="off"
+              id="image"
+              onChange={handleImageChange}
+            />
+
+            <label htmlFor="image">Picture</label>
+            <span className="image-container">
+              {image && <img src={image} alt="Preview" className="image" />}
+            </span>
           </div>
         </div>
         <button className="add-contacts" onClick={handleSubmit}>

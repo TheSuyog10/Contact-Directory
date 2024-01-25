@@ -22,6 +22,9 @@ export const AddContacts = () => {
     setPhone,
     email,
     setEmail,
+    image,
+    setImage,
+    handleImageChange,
   } = UseContact();
 
   const validateEmail = (email) => {
@@ -60,12 +63,22 @@ export const AddContacts = () => {
       return;
     }
 
-    const newContact = { id: nanoid(), name: name, phone: phone, email: email };
+    const newContact = {
+      id: nanoid(),
+      name: name,
+      phone: phone,
+      email: email,
+      image: image,
+    };
     addContact(newContact);
   };
 
   function handleClose() {
     setShowAddPage(false);
+    setName("");
+    setEmail("");
+    setImage(null);
+    setPhone("");
   }
 
   return (
@@ -116,6 +129,20 @@ export const AddContacts = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <label htmlFor="email">Email</label>
+          </div>
+          <div className="inputGroup images">
+            <input
+              type="file"
+              accept="image/*"
+              autoComplete="off"
+              id="image"
+              onChange={(e) => handleImageChange(e)}
+            />
+
+            <label htmlFor="image">Picture</label>
+            <span className="image-container">
+              {image && <img src={image} alt="Preview" className="image" />}
+            </span>
           </div>
         </div>
         <button className="add-contacts" onClick={handleSubmit}>
