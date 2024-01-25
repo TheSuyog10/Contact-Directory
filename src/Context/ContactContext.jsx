@@ -50,6 +50,7 @@ export const ContactContextProvider = ({ children }) => {
     setName("");
     setEmail("");
     setPhone("");
+    setImage(null);
     setShowAddPage(false);
     setSuccessMessage(
       <span>
@@ -89,6 +90,7 @@ export const ContactContextProvider = ({ children }) => {
     setEmail("");
     setPhone("");
     setShowEditPage(false);
+    setImage(null);
     setSuccessMessage(
       <span>
         {" "}

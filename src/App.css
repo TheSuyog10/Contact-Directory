@@ -484,7 +484,7 @@ input::-webkit-inner-spin-button {
 
   .content {
     margin: 1.5rem;
-    /* height: 94vh; */
+    /* height: 100vh; */
   }
 
   .Header h1 {
@@ -506,6 +506,9 @@ input::-webkit-inner-spin-button {
   }
   .toggle-button {
     top: 85%;
+  }
+  .contact-list-container {
+    max-height: 84vh;
   }
   /* Add more mobile-specific styles as needed */
 }

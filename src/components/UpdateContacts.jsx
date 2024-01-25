@@ -97,7 +97,11 @@ export const UpdateContacts = () => {
     setPhone("");
     setImage(null);
   }
-
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSubmit();
+    }
+  };
   return (
     <div className={`overlay-edit-page ${showEditPage ? "show" : ""}`}>
       <div className={`form ${darkMode ? "" : "light"}`}>
@@ -122,6 +126,7 @@ export const UpdateContacts = () => {
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              onKeyPress={(event) => handleKeyPress(event)}
             />
             <label htmlFor="name">Name</label>
           </div>
@@ -133,6 +138,7 @@ export const UpdateContacts = () => {
               id="phone"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              onKeyPress={(event) => handleKeyPress(event)}
             />
             <label htmlFor="phone">Phone No</label>
           </div>
@@ -144,6 +150,7 @@ export const UpdateContacts = () => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onKeyPress={(event) => handleKeyPress(event)}
             />
             <label htmlFor="email">Email</label>
           </div>
@@ -154,6 +161,7 @@ export const UpdateContacts = () => {
               autoComplete="off"
               id="image"
               onChange={handleImageChange}
+              onKeyPress={(event) => handleKeyPress(event)}
             />
 
             <label htmlFor="image">Picture</label>
@@ -162,7 +170,11 @@ export const UpdateContacts = () => {
             </span>
           </div>
         </div>
-        <button className="add-contacts" onClick={handleSubmit}>
+        <button
+          className="add-contacts"
+          onClick={handleSubmit}
+          onKeyPress={(event) => handleKeyPress(event)}
+        >
           Update Contact
         </button>
       </div>
