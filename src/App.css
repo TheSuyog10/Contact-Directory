@@ -362,7 +362,7 @@ input::-webkit-inner-spin-button {
   display: grid;
   place-items: center;
   cursor: pointer;
-  box-shadow: 0 0 50px 20px rgba(0, 0, 0, 0.1);
+
   line-height: 1;
 }
 
@@ -477,7 +477,7 @@ input::-webkit-inner-spin-button {
   .container {
     width: 100%;
     border-radius: 0;
-    height: 94vh;
+    height: 100vh;
     margin: 0;
     padding: 0;
   }
@@ -497,12 +497,15 @@ input::-webkit-inner-spin-button {
   }
 
   .search-box {
-    min-width: 82%;
+    max-width: 82%;
   }
   .search-section {
     margin-top: 1rem;
 
     justify-content: space-between;
+  }
+  .toggle-button {
+    top: 85%;
   }
   /* Add more mobile-specific styles as needed */
 }
